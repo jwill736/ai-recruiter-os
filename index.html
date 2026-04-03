@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Recruiter OS — Built from a 99% Offer Acceptance Rate Practice</title>
+    <meta name="description" content="A Notion-based operating system for technical recruiters. 50+ AI prompts, pipeline tracker, scoring frameworks, outreach templates, and more. Built from real embedded recruiting programs.">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0b;
+            --bg-elevated: #111113;
+            --bg-card: #16161a;
+            --border: #222228;
+            --text: #e8e8ed;
+            --text-secondary: #8b8b9e;
+            --accent: #6c5ce7;
+            --accent-glow: rgba(108, 92, 231, 0.15);
+            --accent-hover: #7c6ef7;
+            --green: #00b894;
+            --orange: #e17055;
+            --max-width: 1120px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-brand span { color: var(--accent); }
+        .nav-cta {
+            background: var(--accent);
+            color: #fff;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+        /* Sections */
+        section { padding: 6rem 2rem; }
+        .container { max-width: var(--max-width); margin: 0 auto; }
+
+        /* Hero */
+        .hero {
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            letter-spacing: 0.03em;
+        }
+        .hero-badge strong { color: var(--green); }
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.25rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.035em;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--accent), #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.25s;
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+        .hero-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(108, 92, 231, 0.25);
+        }
+        .hero-price {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .hero-price strong { color: var(--text); font-size: 1.1rem; }
+
+        /* Stats bar */
+        .stats-bar {
+            background: var(--bg-elevated);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 3rem 2rem;
+        }
+        .stats-grid {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Section headers */
+        .section-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .section-sub {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Problem section */
+        .problem { background: var(--bg); }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+        .pain-list { list-style: none; }
+        .pain-list li {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .pain-list li:last-child { border-bottom: none; }
+        .pain-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(225, 112, 85, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--orange);
+            font-size: 0.85rem;
+        }
+        .pain-text strong { display: block; margin-bottom: 0.15rem; }
+        .pain-text span { font-size: 0.9rem; color: var(--text-secondary); }
+
+        /* Solution section */
+        .solution { background: var(--bg-elevated); }
+        .solution-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .sol-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .sol-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+        .sol-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .sol-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .sol-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Modules */
+        .modules { background: var(--bg); }
+        .module-list {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .module-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            transition: border-color 0.3s;
+        }
+        .module-item:hover { border-color: var(--accent); }
+        .module-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            opacity: 0.5;
+            min-width: 3rem;
+        }
+        .module-info h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .module-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .module-tag {
+            background: var(--accent-glow);
+            color: var(--accent);
+            padding: 0.35rem 0.85rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Who it's for */
+        .audience { background: var(--bg-elevated); }
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .audience-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .audience-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .audience-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Credibility */
+        .credibility { background: var(--bg); }
+        .cred-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+        .cred-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        .cred-highlights {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .cred-highlights li {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .cred-check {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(0, 184, 148, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green);
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+        .cred-highlights li span {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* FAQ */
+        .faq { background: var(--bg-elevated); }
+        .faq-list {
+            max-width: 720px;
+            margin: 3rem auto 0;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 1.75rem 0;
+        }
+        .faq-item:first-child { border-top: 1px solid var(--border); }
+        .faq-q {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+        .faq-a {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        /* CTA footer */
+        .cta-footer {
+            background: var(--bg);
+            text-align: center;
+            padding: 8rem 2rem;
+            position: relative;
+        }
+        .cta-footer::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .cta-footer h2 { margin-bottom: 1rem; }
+        .cta-footer .section-sub {
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section { padding: 4rem 1.25rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .problem-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .solution-cards { grid-template-columns: 1fr; }
+            .module-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 1.5rem;
+            }
+            .module-num { font-size: 1.25rem; }
+            .module-tag { justify-self: start; }
+            .audience-grid { grid-template-columns: 1fr; }
+            .cred-content { grid-template-columns: 1fr; gap: 2rem; }
+            .hero { padding-top: 8rem; }
+            .stat-number { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-brand">Talent <span>SDK</span></a>
+        <a href="https://PLACEHOLDER.lemonsqueezy.com" class="nav-cta">Get the OS — $197</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">Built from <strong>real recruiting programs</strong>, not theory</div>
+        <h1>Stop recruiting from chaos.<br>Start running a <em>real TA operation.</em></h1>
+        <p class="hero-sub">A Notion-based operating system for technical recruiters — built from an embedded practice with a 99% offer acceptance rate, now supercharged with 50+ AI prompts.</p>
+        <a href="https://PLACEHOLDER.lemonsqueezy.com" class="hero-cta">Get The AI Recruiter OS &rarr;</a>
+        <p class="hero-price">One-time purchase. <strong>$197</strong>. Instant access.</p>
+    </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+    <div class="stats-grid">
+        <div class="fade-up">
+            <div class="stat-number">99%</div>
+            <div class="stat-label">Offer acceptance rate</div>
+        </div>
+        <div class="fade-up">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">AI prompts included</div>
+        </div>
+        <div class="fade-up">
+            <div class="stat-number">7</div>
+            <div class="stat-label">Complete modules</div>
+        </div>
+        <div class="fade-up">
+            <div class="stat-number">10 min</div>
+            <div class="stat-label">Setup time</div>
+        </div>
+    </div>
+</div>
+
+<!-- Problem -->
+<section class="problem">
+    <div class="container">
+        <div class="problem-grid">
+            <div class="fade-up">
+                <div class="section-label">The problem</div>
+                <h2>Most recruiters are operating on vibes, not systems.</h2>
+                <p class="section-sub">You know the feeling. Every search starts from scratch. Your pipeline lives in your head (or a messy spreadsheet). Hiring managers are frustrated. Candidates fall through the cracks.</p>
+            </div>
+            <ul class="pain-list fade-up">
+                <li>
+                    <div class="pain-icon">&times;</div>
+                    <div class="pain-text">
+                        <strong>No repeatable process</strong>
+                        <span>Every search is reinvented from zero. No templates, no frameworks, no consistency.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="pain-icon">&times;</div>
+                    <div class="pain-text">
+                        <strong>Candidates slip through cracks</strong>
+                        <span>No system for tracking follow-ups. Great candidates go cold because nobody pinged them back.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="pain-icon">&times;</div>
+                    <div class="pain-text">
+                        <strong>Hiring manager misalignment</strong>
+                        <span>Weeks of sourcing wasted because the recruiter and HM weren't calibrated on the target profile.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="pain-icon">&times;</div>
+                    <div class="pain-text">
+                        <strong>AI potential untapped</strong>
+                        <span>You know AI can help but don't have the right prompts. Generic ChatGPT outputs don't cut it for recruiting.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Solution -->
+<section class="solution">
+    <div class="container">
+        <div class="fade-up" style="text-align:center; margin-bottom: 1rem;">
+            <div class="section-label">The solution</div>
+            <h2>An operating system that makes<br>good recruiting inevitable.</h2>
+            <p class="section-sub" style="margin: 0.5rem auto 0;">The AI Recruiter OS gives you the exact system, templates, and AI prompts used in a practice that has closed hundreds of technical hires with a 99% offer acceptance rate.</p>
+        </div>
+        <div class="solution-cards">
+            <div class="sol-card fade-up">
+                <div class="sol-icon">&#9881;</div>
+                <h3>Systematize Everything</h3>
+                <p>From sourcing to close, every step has a template, tracker, or framework. No more starting from scratch.</p>
+            </div>
+            <div class="sol-card fade-up">
+                <div class="sol-icon">&#9889;</div>
+                <h3>AI-Powered Speed</h3>
+                <p>50+ Claude prompts purpose-built for recruiting workflows. Write JDs, personalize outreach, and prep debriefs in minutes.</p>
+            </div>
+            <div class="sol-card fade-up">
+                <div class="sol-icon">&#127919;</div>
+                <h3>Align with HMs Fast</h3>
+                <p>Intake forms, calibration templates, and weekly sync agendas that eliminate the #1 reason searches fail: misalignment.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What's Inside -->
+<section class="modules">
+    <div class="container">
+        <div class="fade-up" style="text-align:center;">
+            <div class="section-label">What's inside</div>
+            <h2>7 modules. Zero fluff.</h2>
+            <p class="section-sub" style="margin: 0 auto;">Every module is fully built out with real copy, real templates, and real frameworks. Not placeholder skeletons.</p>
+        </div>
+        <div class="module-list">
+            <div class="module-item fade-up">
+                <div class="module-num">01</div>
+                <div class="module-info">
+                    <h3>Candidate Pipeline Tracker</h3>
+                    <p>Kanban and table views with 8 pipeline stages, candidate scoring, filtered views by role, stage, and follow-up urgency.</p>
+                </div>
+                <div class="module-tag">Database</div>
+            </div>
+            <div class="module-item fade-up">
+                <div class="module-num">02</div>
+                <div class="module-info">
+                    <h3>Sourcer Handoff Package Generator</h3>
+                    <p>Brief a sourcer in under 10 minutes with role details, ideal profile, calibration notes, green/red flags, and approved outreach.</p>
+                </div>
+                <div class="module-tag">Template</div>
+            </div>
+            <div class="module-item fade-up">
+                <div class="module-num">03</div>
+                <div class="module-info">
+                    <h3>Candidate Scoring + Calibration Framework</h3>
+                    <p>5-dimension scoring rubric with behavioral anchors, calibration session template, and decision log for every advance/reject.</p>
+                </div>
+                <div class="module-tag">Framework</div>
+            </div>
+            <div class="module-item fade-up">
+                <div class="module-num">04</div>
+                <div class="module-info">
+                    <h3>Outreach Sequence Templates</h3>
+                    <p>7 ready-to-send messages: cold DMs, warm intros, follow-ups, and applicant responses — all with [VARIABLES] for personalization.</p>
+                </div>
+                <div class="module-tag">Templates</div>
+            </div>
+            <div class="module-item fade-up">
+                <div class="module-num">05</div>
+                <div class="module-info">
+                    <h3>Claude AI Prompt Library</h3>
+                    <p>50+ prompts across 8 categories: sourcing, JDs, candidate evaluation, outreach, HM management, offer/close, and reporting.</p>
+                </div>
+                <div class="module-tag">50+ Prompts</div>
+            </div>
+            <div class="module-item fade-up">
+                <div class="module-num">06</div>
+                <div class="module-info">
+                    <h3>Interview-to-Offer Dashboard</h3>
+                    <p>Active roles tracker, interview pipeline, offer tracker, and weekly metrics snapshot — all in connected databases.</p>
+                </div>
+                <div class="module-tag">Dashboard</div>
+            </div>
+            <div class="module-item fade-up">
+                <div class="module-num">07</div>
+                <div class="module-info">
+                    <h3>Hiring Manager Alignment Docs</h3>
+                    <p>New role intake form, weekly recruiting sync agenda, and end-of-search debrief template. Kill misalignment on day one.</p>
+                </div>
+                <div class="module-tag">Docs</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Who it's for -->
+<section class="audience">
+    <div class="container">
+        <div class="fade-up" style="text-align:center;">
+            <div class="section-label">Who this is for</div>
+            <h2>Built for recruiters who<br>take the craft seriously.</h2>
+        </div>
+        <div class="audience-grid">
+            <div class="audience-card fade-up">
+                <h3>TA Leaders &amp; Heads of Recruiting</h3>
+                <p>You need your team running a consistent, measurable process. This gives them the playbook and the tools to execute it.</p>
+            </div>
+            <div class="audience-card fade-up">
+                <h3>Technical Recruiters</h3>
+                <p>You're hiring engineers, ML specialists, and technical leaders. These templates and prompts were built for exactly those roles.</p>
+            </div>
+            <div class="audience-card fade-up">
+                <h3>Embedded Recruiting Partners</h3>
+                <p>You operate as a strategic partner inside companies. This is the system that lets you deliver at that level from day one.</p>
+            </div>
+            <div class="audience-card fade-up">
+                <h3>Solo Recruiters at Startups &amp; Scale-ups</h3>
+                <p>You're the entire recruiting function. You don't have time to build systems from scratch — so use the ones that already work.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Credibility -->
+<section class="credibility">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label">Who built this</div>
+            <h2>Not a template designer.<br>A recruiting operator.</h2>
+        </div>
+        <div class="cred-content">
+            <div class="cred-text fade-up">
+                <p>The AI Recruiter OS was built by an embedded recruiting partner who has led multimillion-dollar hiring programs across engineering, gaming, aerospace, AI, and fintech.</p>
+                <p>This isn't a template built from blog posts and best-practice articles. It's the actual system — the pipeline structure, the scoring rubrics, the outreach sequences, the HM alignment docs — extracted from a practice that consistently closes technical hires at a 99% offer acceptance rate.</p>
+                <p>Now building <strong>Provyn</strong>, a recruiting tech and skills verification SaaS, and operating under the <strong>Talent SDK</strong> brand.</p>
+            </div>
+            <ul class="cred-highlights fade-up">
+                <li>
+                    <div class="cred-check">&#10003;</div>
+                    <span>99% offer acceptance rate across programs</span>
+                </li>
+                <li>
+                    <div class="cred-check">&#10003;</div>
+                    <span>Multimillion-dollar hiring programs delivered</span>
+                </li>
+                <li>
+                    <div class="cred-check">&#10003;</div>
+                    <span>Specialized in engineering, AI, aerospace, fintech, gaming</span>
+                </li>
+                <li>
+                    <div class="cred-check">&#10003;</div>
+                    <span>Built and led recruiting programs at technical firms</span>
+                </li>
+                <li>
+                    <div class="cred-check">&#10003;</div>
+                    <span>Currently building Provyn — recruiting tech SaaS</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <div class="container">
+        <div class="fade-up" style="text-align:center;">
+            <div class="section-label">FAQ</div>
+            <h2>Common questions</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item fade-up">
+                <div class="faq-q">Do I need to know how to use Notion?</div>
+                <div class="faq-a">No. The Quick Start Guide walks you through everything step-by-step. If you can click "Duplicate," you're good. There's also a Loom walkthrough video included.</div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q">Do I need a paid Notion account?</div>
+                <div class="faq-a">No. The free Notion account works perfectly. You can duplicate and use the entire OS without paying Notion a dime.</div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q">Is this for agency or in-house recruiters?</div>
+                <div class="faq-a">Both. The system was built in an embedded model that bridges agency and in-house recruiting. The pipeline tracker, scoring frameworks, and prompt library work regardless of your setup.</div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q">What if it doesn't work for me?</div>
+                <div class="faq-a">Email us. This was built from a real practice, so if something doesn't fit your workflow, we want to hear about it. We're here to help you make it work.</div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q">Do I need a Claude AI subscription?</div>
+                <div class="faq-a">The free tier of Claude works for most prompts. A paid subscription gives you longer outputs and faster responses, but it's not required to get value from the prompt library.</div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q">Can I customize the templates?</div>
+                <div class="faq-a">Absolutely. Once you duplicate the template into your workspace, it's yours. Add fields, change stages, modify templates — make it fit your exact workflow.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Footer -->
+<section class="cta-footer">
+    <div class="container fade-up">
+        <div class="section-label">Ready to upgrade your recruiting?</div>
+        <h2>Get the system. Run the process.<br>Close the hires.</h2>
+        <p class="section-sub">One-time purchase. Instant access. The same system behind a 99% offer acceptance rate — now in your Notion workspace.</p>
+        <a href="https://PLACEHOLDER.lemonsqueezy.com" class="hero-cta">Get The AI Recruiter OS — $197 &rarr;</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 Talent SDK. All rights reserved.</p>
+</footer>
+
+<!-- Scroll Animation -->
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
