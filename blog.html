@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Recruiter's Playbook: How to Build a Recruiting Operating System in Notion</title>
+    <meta name="description" content="Learn how to build a complete technical recruiting system in Notion with AI-powered prompts, candidate pipeline tracking, scoring frameworks, and outreach templates.">
+    <meta name="keywords" content="notion recruiting template, AI recruiting, technical recruiter tools, recruiting operating system, notion candidate tracker, claude prompts recruiting, hiring manager alignment, recruiter AI prompts, notion template recruiter, talent acquisition tools">
+    <link rel="canonical" href="https://ai-recruiter-os.vercel.app/blog.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="The AI Recruiter's Playbook: Build a Real TA Operating System">
+    <meta property="og:description" content="The exact system behind a 99% offer acceptance rate — now available as a Notion template with 50+ AI prompts.">
+    <meta property="og:url" content="https://ai-recruiter-os.vercel.app/blog.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The AI Recruiter's Playbook">
+    <meta name="twitter:description" content="Build a real recruiting operating system in Notion with 50+ AI prompts.">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0b;
+            --bg-elevated: #111113;
+            --bg-card: #16161a;
+            --border: #222228;
+            --text: #e8e8ed;
+            --text-secondary: #8b8b9e;
+            --accent: #6c5ce7;
+            --accent-glow: rgba(108, 92, 231, 0.15);
+            --accent-hover: #7c6ef7;
+            --green: #00b894;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; height: 64px;
+        }
+        .nav-brand { font-weight: 700; font-size: 1rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-brand span { color: var(--accent); }
+        .nav-cta {
+            background: var(--accent); color: #fff; padding: 0.5rem 1.25rem; border-radius: 8px;
+            text-decoration: none; font-size: 0.875rem; font-weight: 600; transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-hover); }
+
+        /* Article */
+        article { max-width: 720px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+        .article-label {
+            text-transform: uppercase; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1rem;
+        }
+        article h1 {
+            font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800;
+            letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.5rem;
+        }
+        .article-meta { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+        article h2 {
+            font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+            margin: 3rem 0 1rem; padding-top: 1rem;
+        }
+        article h3 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        article p { color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 1.02rem; }
+        article strong { color: var(--text); }
+        article ul, article ol { color: var(--text-secondary); margin: 0 0 1.5rem 1.5rem; font-size: 1.02rem; }
+        article li { margin-bottom: 0.5rem; }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+
+        .callout {
+            background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+            border-radius: 8px; padding: 1.5rem; margin: 2rem 0;
+        }
+        .callout p { margin-bottom: 0; color: var(--text); }
+
+        .cta-box {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 2.5rem; text-align: center; margin: 3rem 0;
+        }
+        .cta-box h3 { font-size: 1.3rem; margin-bottom: 0.75rem; }
+        .cta-box p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .cta-box a {
+            display: inline-block; background: var(--accent); color: #fff;
+            padding: 0.85rem 2rem; border-radius: 10px; text-decoration: none;
+            font-weight: 700; transition: background 0.2s;
+        }
+        .cta-box a:hover { background: var(--accent-hover); text-decoration: none; }
+
+        code {
+            background: var(--bg-card); padding: 0.2rem 0.5rem; border-radius: 4px;
+            font-size: 0.9em; color: var(--green);
+        }
+
+        footer {
+            text-align: center; padding: 2rem; font-size: 0.8rem;
+            color: var(--text-secondary); border-top: 1px solid var(--border);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The AI Recruiter's Playbook: How to Build a Recruiting Operating System in Notion",
+        "description": "Learn how to build a complete technical recruiting system in Notion with AI-powered prompts, candidate pipeline tracking, scoring frameworks, and outreach templates.",
+        "datePublished": "2026-04-03",
+        "author": {
+            "@type": "Person",
+            "name": "The AI Recruiter OS"
+        }
+    }
+    </script>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">The AI <span>Recruiter OS</span></a>
+        <a href="https://PLACEHOLDER.lemonsqueezy.com" class="nav-cta">Get the OS — $197</a>
+    </div>
+</nav>
+
+<article>
+    <div class="article-label">The Playbook</div>
+    <h1>How to Build a Recruiting Operating System That Actually Works</h1>
+    <div class="article-meta">A practical guide for technical recruiters who are tired of starting every search from scratch.</div>
+
+    <p>If you've been recruiting for more than a year, you've probably noticed something: <strong>the best recruiters aren't necessarily the most talented. They're the most systematic.</strong></p>
+
+    <p>They have a process for sourcing. A framework for scoring candidates. Templates for every outreach scenario. A structured way to align with hiring managers. And a dashboard that tells them exactly where every search stands at any given moment.</p>
+
+    <p>The rest of us? We're working from memory, scattered notes, and whatever spreadsheet we cobbled together for the last search.</p>
+
+    <p>This guide breaks down the seven components of a recruiting operating system that consistently delivers results — and how AI tools like Claude can supercharge each one.</p>
+
+    <h2>1. The Candidate Pipeline Tracker</h2>
+
+    <p>Every recruiting operation needs a single source of truth for candidate status. Not a spreadsheet you forget to update. Not your ATS that's too clunky to use in real-time. A pipeline tracker that's fast, visual, and always current.</p>
+
+    <p>The most effective format combines two views: <strong>a Kanban board</strong> for visual pipeline management and <strong>a table view</strong> for filtering and sorting.</p>
+
+    <p>Your pipeline stages should map to your actual process:</p>
+    <ul>
+        <li><strong>Sourced</strong> — Identified but not yet contacted</li>
+        <li><strong>Contacted</strong> — Outreach sent, awaiting response</li>
+        <li><strong>Screened</strong> — Phone screen completed</li>
+        <li><strong>Submitted</strong> — Presented to hiring manager</li>
+        <li><strong>Interviewing</strong> — In active interview loop</li>
+        <li><strong>Offer</strong> — Offer extended or in negotiation</li>
+        <li><strong>Closed Won / Closed Lost</strong> — Final outcome</li>
+    </ul>
+
+    <p>The key fields that matter beyond just name and status: <strong>candidate score</strong> (1-5), <strong>last contact date</strong> (so nobody goes cold), <strong>source channel</strong> (so you know what's working), and <strong>recruiter owner</strong> (for team visibility).</p>
+
+    <div class="callout">
+        <p><strong>AI accelerator:</strong> Use Claude to analyze a batch of LinkedIn profiles and pre-score candidates before you even reach out. Paste 5-10 profiles and ask it to rank them against your requirements. You'll cut your sourcing review time in half.</p>
+    </div>
+
+    <h2>2. The Sourcer Handoff Package</h2>
+
+    <p>If you work with sourcers — internal or external — the quality of your brief determines the quality of your pipeline. A vague "find me a senior engineer" request produces vague results.</p>
+
+    <p>A proper handoff package includes:</p>
+    <ul>
+        <li>Role brief with specific requirements (not a copy-paste of the JD)</li>
+        <li>Ideal candidate profile with must-haves separated from nice-to-haves</li>
+        <li>Calibration notes from the hiring manager</li>
+        <li>Green flags and red flags (what to look for, what to avoid)</li>
+        <li>Pre-approved outreach messaging</li>
+        <li>2-3 sample profiles that represent the target</li>
+    </ul>
+
+    <p><strong>The goal: a sourcer should be fully briefed in under 10 minutes.</strong> If it takes longer, your brief isn't structured enough.</p>
+
+    <h2>3. Candidate Scoring and Calibration</h2>
+
+    <p>Gut-feel hiring is how you end up with a 50% offer acceptance rate. Structured scoring is how you get to 90%+.</p>
+
+    <p>The five dimensions that matter for technical roles:</p>
+    <ol>
+        <li><strong>Technical Fit</strong> — Do they have the skills and experience?</li>
+        <li><strong>Culture Fit</strong> — Will they thrive in this environment?</li>
+        <li><strong>Motivation</strong> — Do they actually want THIS role?</li>
+        <li><strong>Communication</strong> — Can they articulate their thinking?</li>
+        <li><strong>Compensation Alignment</strong> — Is the deal closeable?</li>
+    </ol>
+
+    <p>Each dimension gets a 1-5 score with behavioral anchors — specific descriptions of what each score level looks like. This removes subjectivity and makes calibration conversations with hiring managers productive instead of circular.</p>
+
+    <div class="callout">
+        <p><strong>AI accelerator:</strong> After every screen, paste your notes into Claude and ask it to generate a structured scorecard. It'll organize your thoughts, flag gaps you might have missed, and give you a formatted output you can share with the hiring manager in minutes.</p>
+    </div>
+
+    <h2>4. Outreach Sequences That Get Responses</h2>
+
+    <p>Most recruiting outreach fails for one reason: <strong>it's generic.</strong> The fix isn't writing from scratch every time — it's having proven templates with clear personalization points.</p>
+
+    <p>The seven messages every recruiter needs:</p>
+    <ol>
+        <li>Cold LinkedIn DM for technical roles</li>
+        <li>Warm intro (referral or mutual connection)</li>
+        <li>Cold email (when you have their address)</li>
+        <li>Follow-up #1 (3 days, no response)</li>
+        <li>Follow-up #2 (7 days, final touch)</li>
+        <li>Inbound response — interested</li>
+        <li>Inbound response — not a fit, keep warm</li>
+    </ol>
+
+    <p>Each template should have clearly marked variables — <code>[FIRST NAME]</code>, <code>[SPECIFIC DETAIL]</code>, <code>[ROLE TITLE]</code> — so personalization takes 60 seconds instead of 10 minutes.</p>
+
+    <p><strong>Two follow-ups is the maximum.</strong> After that, you're not persistent — you're annoying. Add them to a nurture list and re-engage in 3-6 months.</p>
+
+    <h2>5. The AI Prompt Library</h2>
+
+    <p>This is where the leverage multiplies. AI doesn't replace recruiter judgment — it eliminates the grunt work so you can focus on relationships and strategy.</p>
+
+    <p>The highest-impact prompt categories for recruiters:</p>
+    <ul>
+        <li><strong>Sourcing</strong> — Boolean string generation, competitor mapping, passive candidate identification</li>
+        <li><strong>Job Descriptions</strong> — Writing, rewriting, and auditing JDs for bias</li>
+        <li><strong>Candidate Evaluation</strong> — Screening questions, scorecards, debrief summaries</li>
+        <li><strong>Outreach</strong> — Personalization, A/B variants, subject lines</li>
+        <li><strong>Hiring Manager Management</strong> — Calibration prep, pushback scripts, weekly updates</li>
+        <li><strong>Offer and Close</strong> — Counter-offer handling, negotiation scripts, acceptance sequences</li>
+        <li><strong>Reporting</strong> — Pipeline summaries, time-to-fill analysis, QBR outlines</li>
+    </ul>
+
+    <p>The key to making AI prompts work for recruiting: <strong>specificity.</strong> Don't ask Claude to "write outreach." Ask it to write a LinkedIn DM for a senior backend engineer at a Series B fintech, referencing their open-source Kubernetes contributions, with a comp range of $180-220K and a remote-first policy. The more context you give, the better the output.</p>
+
+    <h2>6. The Interview-to-Offer Dashboard</h2>
+
+    <p>Pipeline visibility prevents surprises. You need to know, at a glance:</p>
+    <ul>
+        <li>Which roles are active and where each one stands</li>
+        <li>Who's interviewing this week and what the expected outcomes are</li>
+        <li>Which offers are out and what the close probability is</li>
+        <li>Weekly velocity metrics — submittals, interviews, offers, closes</li>
+    </ul>
+
+    <p>This isn't about building elaborate dashboards. It's about <strong>three connected databases</strong> — active roles, interview pipeline, and offer tracker — that give you a real-time snapshot without manual reporting.</p>
+
+    <h2>7. Hiring Manager Alignment Docs</h2>
+
+    <p>The number one reason searches fail isn't a bad market or a weak pipeline. <strong>It's recruiter-HM misalignment.</strong> You're sourcing one profile while they're expecting another.</p>
+
+    <p>Three documents fix this:</p>
+    <ol>
+        <li><strong>Intake form</strong> — Structured template you fill out together (not as homework). Covers role details, requirements, comp, interview process, and working agreements.</li>
+        <li><strong>Weekly sync agenda</strong> — Pipeline snapshot, candidate updates, blockers, market intel, action items. Keeps you aligned without wasting time.</li>
+        <li><strong>End-of-search debrief</strong> — What worked, what didn't, lessons for next time. This is the most underused tool in recruiting.</li>
+    </ol>
+
+    <div class="cta-box">
+        <h3>Want the complete system, ready to use?</h3>
+        <p>The AI Recruiter OS packages everything above into a Notion workspace you can duplicate in 30 seconds. All templates, all frameworks, 50+ AI prompts — fully built out and usable on day one.</p>
+        <a href="https://PLACEHOLDER.lemonsqueezy.com">Get The AI Recruiter OS — $197 &rarr;</a>
+    </div>
+
+    <h2>The Compound Effect</h2>
+
+    <p>None of these seven components are revolutionary on their own. What makes them powerful is <strong>the system.</strong> When your pipeline, scoring, outreach, HM alignment, and reporting all connect and reinforce each other, recruiting stops being chaotic and starts being predictable.</p>
+
+    <p>You stop losing candidates to slow follow-up. You stop wasting weeks on misaligned searches. You stop writing outreach from scratch. You stop scrambling to pull together metrics for leadership.</p>
+
+    <p>You start operating like the recruiter who consistently closes at a 99% offer acceptance rate. Because the system makes good recruiting inevitable.</p>
+
+    <p>That's the whole point.</p>
+</article>
+
+<footer>
+    <p>&copy; 2026 The AI Recruiter OS. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
