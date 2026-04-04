@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Free AI Prompts for Technical Recruiters — The AI Recruiter OS</title>
+    <meta name="description" content="5 free Claude AI prompts for technical recruiters. Boolean search generator, screening questions, outreach personalizer, HM update drafter, and counter-offer handler. Copy, paste, and use today.">
+    <meta name="keywords" content="free AI prompts recruiting, claude prompts recruiter, AI recruiting tools free, technical recruiter AI, hiring AI prompts">
+    <link rel="canonical" href="https://ai-recruiter-os.vercel.app/free-prompts.html">
+    <meta property="og:title" content="5 Free AI Prompts for Technical Recruiters">
+    <meta property="og:description" content="Copy-paste Claude prompts for sourcing, screening, outreach, HM updates, and counter-offers.">
+    <meta property="og:url" content="https://ai-recruiter-os.vercel.app/free-prompts.html">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0b; --bg-card: #16161a; --border: #222228;
+            --text: #e8e8ed; --text-secondary: #8b8b9e;
+            --accent: #6c5ce7; --accent-glow: rgba(108, 92, 231, 0.15);
+            --accent-hover: #7c6ef7; --green: #00b894;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(10, 10, 11, 0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; height: 64px;
+        }
+        .nav-brand { font-weight: 700; font-size: 1rem; color: var(--text); text-decoration: none; }
+        .nav-brand span { color: var(--accent); }
+        .nav-cta {
+            background: var(--accent); color: #fff; padding: 0.5rem 1.25rem; border-radius: 8px;
+            text-decoration: none; font-size: 0.875rem; font-weight: 600; transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-hover); }
+
+        .content { max-width: 720px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+        .label { text-transform: uppercase; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1rem; }
+        h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+        .subtitle { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 3rem; line-height: 1.6; }
+
+        .prompt-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 2rem; margin-bottom: 1.5rem;
+        }
+        .prompt-card h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .prompt-card .use-case { font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; font-weight: 500; }
+        .prompt-card pre {
+            background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+            padding: 1.25rem; font-size: 0.85rem; line-height: 1.65;
+            color: var(--text-secondary); white-space: pre-wrap; word-wrap: break-word;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            margin-bottom: 1rem; position: relative;
+        }
+        .pro-tip {
+            font-size: 0.85rem; color: var(--text-secondary); padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+        .pro-tip strong { color: var(--green); }
+
+        .cta-box {
+            background: var(--bg-card); border: 1px solid var(--accent); border-radius: 20px;
+            padding: 3rem; text-align: center; margin: 3rem 0;
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+        .cta-box h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+        .cta-box p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem; }
+        .cta-box a {
+            display: inline-block; background: var(--accent); color: #fff;
+            padding: 1rem 2.5rem; border-radius: 12px; text-decoration: none;
+            font-weight: 700; font-size: 1.05rem; transition: all 0.2s;
+        }
+        .cta-box a:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .cta-box .price-note { margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary); }
+
+        footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--text-secondary); border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">The AI <span>Recruiter OS</span></a>
+        <a href="/#pricing" class="nav-cta">See Full OS</a>
+    </div>
+</nav>
+
+<div class="content">
+    <div class="label">Free Resource</div>
+    <h1>5 AI Prompts Every Technical Recruiter Should Be Using</h1>
+    <p class="subtitle">Copy these into Claude (claude.ai), fill in the [BRACKETS], and watch them work. These are pulled directly from the 50+ prompt library inside The AI Recruiter OS.</p>
+
+    <div class="prompt-card">
+        <h2>1. Boolean Search String Generator</h2>
+        <div class="use-case">Sourcing &bull; Saves 30+ minutes per search</div>
+        <pre>I'm sourcing for a [ROLE TITLE] at a [COMPANY TYPE — e.g., Series B fintech / enterprise SaaS / AI startup].
+
+Key requirements:
+- [REQUIREMENT 1]
+- [REQUIREMENT 2]
+- [REQUIREMENT 3]
+
+Generate 5 Boolean search strings I can use on:
+1. LinkedIn Recruiter
+2. Google (X-ray search for LinkedIn profiles)
+3. GitHub
+
+For each, optimize for precision over recall — I'd rather see 20 highly relevant results than 200 loosely related ones. Include exclusion terms to filter out irrelevant profiles.</pre>
+        <div class="pro-tip"><strong>Pro tip:</strong> Run the top-performing Boolean string, then paste 3-5 result profiles back into Claude and ask it to refine the search based on what's working.</div>
+    </div>
+
+    <div class="prompt-card">
+        <h2>2. Screening Question Generator</h2>
+        <div class="use-case">Candidate Evaluation &bull; Better screens in 2 minutes</div>
+        <pre>Generate screening questions for a [ROLE TITLE] candidate. The role requires:
+- [KEY REQUIREMENT 1]
+- [KEY REQUIREMENT 2]
+- [KEY REQUIREMENT 3]
+
+Create 3 categories of questions:
+1. Technical depth (5 questions) — assess hands-on expertise, not textbook knowledge
+2. Problem-solving and judgment (3 questions) — scenarios that reveal how they think
+3. Motivation and fit (3 questions) — understand why they want THIS role
+
+For each question, include:
+- The question itself
+- What a strong answer sounds like
+- What a red-flag answer sounds like
+- A follow-up probe to go deeper</pre>
+        <div class="pro-tip"><strong>Pro tip:</strong> Customize the role requirements for each search. The more specific you are about the tech stack and team context, the better the questions.</div>
+    </div>
+
+    <div class="prompt-card">
+        <h2>3. Outreach Personalizer</h2>
+        <div class="use-case">Outreach &bull; 2x your response rate</div>
+        <pre>Personalize this outreach template for the candidate below:
+
+Template:
+[PASTE YOUR TEMPLATE]
+
+Candidate details:
+- Name: [NAME]
+- Current role: [TITLE at COMPANY]
+- Notable experience: [KEY DETAILS FROM LINKEDIN]
+- Something unique: [BLOG POST / OSS PROJECT / CONFERENCE TALK]
+
+Role I'm pitching: [ROLE TITLE] at [COMPANY]
+
+Write 3 versions:
+1. Direct and professional
+2. Casual and conversational
+3. Leading with a specific compliment about their work
+
+Keep each under 300 characters for LinkedIn. Make each feel genuinely personal, not templated.</pre>
+        <div class="pro-tip"><strong>Pro tip:</strong> The version that references something specific about their work (option 3) almost always outperforms generic messages.</div>
+    </div>
+
+    <div class="prompt-card">
+        <h2>4. Weekly HM Update Drafter</h2>
+        <div class="use-case">HM Management &bull; 5-minute weekly updates</div>
+        <pre>Generate a weekly recruiting update email for [HM NAME] on the [ROLE TITLE] search.
+
+This week's data:
+- New candidates sourced: [#]
+- Outreach sent: [#]
+- Response rate: [%]
+- Screens completed: [#]
+- Candidates submitted: [NAMES + BRIEF NOTES]
+- Interviews scheduled: [NAMES + DATES]
+- Blockers: [ANY]
+
+Format as a brief, scannable email with bullet points. Include a "Next Week" section with planned actions. End with any decisions or input needed from the HM.</pre>
+        <div class="pro-tip"><strong>Pro tip:</strong> Send this every Friday at the same time. Consistency builds trust with hiring managers faster than anything else.</div>
+    </div>
+
+    <div class="prompt-card">
+        <h2>5. Counter-Offer Response Script</h2>
+        <div class="use-case">Offer &amp; Close &bull; Save deals that are slipping</div>
+        <pre>My candidate just received a counter-offer from their current employer.
+
+- Our offer: [DETAILS]
+- Their counter-offer: [DETAILS]
+- Candidate's original reasons for leaving: [REASONS]
+- Their current emotional state: [e.g., conflicted, leaning toward staying]
+
+Help me:
+1. Frame the conversation — what to say in the first 2 minutes
+2. Remind them of their original motivations without being manipulative
+3. Address the counter-offer point by point
+4. Share the data on counter-offer outcomes (most leave within 6-12 months)
+5. Give them a framework for making the decision themselves
+6. Know when to back off — what signs tell me the deal is lost?
+
+Tone: empathetic advisor, not salesperson.</pre>
+        <div class="pro-tip"><strong>Pro tip:</strong> This prompt has saved multiple deals. The key is using it BEFORE the call, not during. Prepare your talking points, then have a real conversation.</div>
+    </div>
+
+    <div class="cta-box">
+        <h2>These are 5 of 50+</h2>
+        <p>The full AI Recruiter OS includes 50+ prompts across sourcing, JDs, candidate evaluation, outreach, HM management, offer/close, and reporting — plus pipeline trackers, scoring frameworks, outreach templates, and hiring manager alignment docs.</p>
+        <a href="/#pricing">See the Full OS &rarr;</a>
+        <p class="price-note">Free tier available. Pro starts at $97.</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 The AI Recruiter OS. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

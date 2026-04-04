@@ -395,6 +395,108 @@
             font-weight: 500;
         }
 
+        /* Pricing */
+        .pricing { background: var(--bg); }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .price-card:hover { transform: translateY(-4px); }
+        .price-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+        .price-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+        .price-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .price-card .price-desc { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.25rem;
+        }
+        .price-amount .currency { font-size: 1.5rem; vertical-align: super; }
+        .price-amount .was {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            font-weight: 400;
+            margin-left: 0.5rem;
+        }
+        .price-period { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 2rem; }
+        .price-features { list-style: none; margin-bottom: 2rem; }
+        .price-features li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+        .price-features li::before {
+            content: '\2713';
+            color: var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .price-features li.disabled { opacity: 0.35; }
+        .price-features li.disabled::before { content: '\2014'; color: var(--text-secondary); }
+        .price-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 0.9rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .price-btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .price-btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .price-btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+        .price-btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .price-guarantee {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
         /* FAQ */
         .faq { background: var(--bg-elevated); }
         .faq-list {
@@ -477,6 +579,8 @@
             .module-tag { justify-self: start; }
             .audience-grid { grid-template-columns: 1fr; }
             .cred-content { grid-template-columns: 1fr; gap: 2rem; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+            .price-card.featured { order: -1; }
             .hero { padding-top: 8rem; }
             .stat-number { font-size: 2rem; }
         }
@@ -488,7 +592,7 @@
 <nav>
     <div class="nav-inner">
         <a href="#" class="nav-brand">The AI <span>Recruiter OS</span></a>
-        <a href="https://PLACEHOLDER.lemonsqueezy.com" class="nav-cta">Get the OS — $197</a>
+        <a href="#pricing" class="nav-cta">Get the OS &darr;</a>
     </div>
 </nav>
 
@@ -498,8 +602,8 @@
         <div class="hero-badge">Built from <strong>real recruiting programs</strong>, not theory</div>
         <h1>Stop recruiting from chaos.<br>Start running a <em>real TA operation.</em></h1>
         <p class="hero-sub">A Notion-based operating system for technical recruiters — built from an embedded practice with a 99% offer acceptance rate, now supercharged with 50+ AI prompts.</p>
-        <a href="https://PLACEHOLDER.lemonsqueezy.com" class="hero-cta">Get The AI Recruiter OS &rarr;</a>
-        <p class="hero-price">One-time purchase. <strong>$197</strong>. Instant access.</p>
+        <a href="#pricing" class="hero-cta">See Pricing &rarr;</a>
+        <p class="hero-price">Starting at <strong>$0</strong>. One-time purchase. Instant access.</p>
     </div>
 </section>
 
@@ -732,6 +836,78 @@
     </div>
 </section>
 
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="fade-up" style="text-align:center;">
+            <div class="section-label">Pricing</div>
+            <h2>One system. Three ways in.</h2>
+            <p class="section-sub" style="margin: 0 auto;">No subscriptions. No recurring fees. Buy once, use forever.</p>
+        </div>
+        <div class="pricing-grid">
+            <!-- Free Tier -->
+            <div class="price-card fade-up">
+                <h3>Starter</h3>
+                <p class="price-desc">Get a taste of the system</p>
+                <div class="price-amount"><span class="currency">$</span>0</div>
+                <div class="price-period">Free forever</div>
+                <ul class="price-features">
+                    <li>Candidate Pipeline Tracker (Kanban + table)</li>
+                    <li>5 AI prompts from the library</li>
+                    <li>Basic outreach template (cold DM)</li>
+                    <li>Quick Start Guide</li>
+                    <li class="disabled">Sourcer Handoff Package Generator</li>
+                    <li class="disabled">Scoring + Calibration Framework</li>
+                    <li class="disabled">Full 50+ AI Prompt Library</li>
+                    <li class="disabled">Interview-to-Offer Dashboard</li>
+                    <li class="disabled">HM Alignment Docs</li>
+                </ul>
+                <a href="https://PLACEHOLDER-FREE-NOTION-LINK" class="price-btn price-btn-outline">Get Starter — Free</a>
+            </div>
+            <!-- Pro Tier -->
+            <div class="price-card featured fade-up">
+                <div class="price-badge">Most Popular</div>
+                <h3>Pro</h3>
+                <p class="price-desc">The complete recruiting OS</p>
+                <div class="price-amount"><span class="currency">$</span>97</div>
+                <div class="price-period">One-time payment</div>
+                <ul class="price-features">
+                    <li>Everything in Starter</li>
+                    <li>Full Candidate Pipeline Tracker (4 views)</li>
+                    <li>Sourcer Handoff Package Generator</li>
+                    <li>Candidate Scoring + Calibration Framework</li>
+                    <li>All 7 Outreach Sequence Templates</li>
+                    <li>Complete 50+ AI Prompt Library</li>
+                    <li>Interview-to-Offer Dashboard (3 databases)</li>
+                    <li>Hiring Manager Alignment Docs</li>
+                    <li>Loom walkthrough video</li>
+                </ul>
+                <a href="https://PLACEHOLDER-PRO.lemonsqueezy.com" class="price-btn price-btn-primary">Get Pro — $97</a>
+            </div>
+            <!-- Team Tier -->
+            <div class="price-card fade-up">
+                <h3>Team</h3>
+                <p class="price-desc">For TA teams and hiring orgs</p>
+                <div class="price-amount"><span class="currency">$</span>197</div>
+                <div class="price-period">One-time payment</div>
+                <ul class="price-features">
+                    <li>Everything in Pro</li>
+                    <li>Team-ready setup (multi-recruiter fields)</li>
+                    <li>Recruiting OKR + metrics framework</li>
+                    <li>QBR presentation outline template</li>
+                    <li>Diversity hiring report framework</li>
+                    <li>Candidate nurture sequence (6-month)</li>
+                    <li>HM satisfaction survey template</li>
+                    <li>Priority email support</li>
+                    <li>Future updates included</li>
+                </ul>
+                <a href="https://PLACEHOLDER-TEAM.lemonsqueezy.com" class="price-btn price-btn-outline">Get Team — $197</a>
+            </div>
+        </div>
+        <p class="price-guarantee fade-up">&#128274; Secure checkout via Lemon Squeezy. Instant delivery. Works with free Notion.</p>
+    </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq">
     <div class="container">
@@ -774,7 +950,7 @@
         <div class="section-label">Ready to upgrade your recruiting?</div>
         <h2>Get the system. Run the process.<br>Close the hires.</h2>
         <p class="section-sub">One-time purchase. Instant access. The same system behind a 99% offer acceptance rate — now in your Notion workspace.</p>
-        <a href="https://PLACEHOLDER.lemonsqueezy.com" class="hero-cta">Get The AI Recruiter OS — $197 &rarr;</a>
+        <a href="#pricing" class="hero-cta">See Plans — Starting at $0 &rarr;</a>
     </div>
 </section>
 

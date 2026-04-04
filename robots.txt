@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thankyou.html
+
+Sitemap: https://ai-recruiter-os.vercel.app/sitemap.xml
